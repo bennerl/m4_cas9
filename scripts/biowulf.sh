@@ -1,6 +1,6 @@
 #!/bin/bash
 ANN=/data/bennerl/reference/
-WD=/data/bennerl/m4_cas9/
+WD=/data/bennerl/m4_cas9_data/
 
 rm ${WD}hisat2_swarm.txt
 for i in ${WD}*/
