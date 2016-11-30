@@ -1,6 +1,21 @@
 #!/bin/bash
 
+##############################################################################################################
+ANN=/data/bennerl/reference/
+WD=/data/bennerl/m4_cas9_data/
 
+rm ${WD}fastqc_swarm.txt
+for i in ${WD}*rep*/
+do
+	rm ${i}*html
+	rm ${i}*zip
+	FILE=${i#${WD}}
+	FILE=${FILE%/}
+	echo "fastqc -o ${i} ${i}*1.fastq" >> ${WD}fastqc_swarm.txt
+	echo "fastqc -o ${i} ${i}*2.fastq" >> ${WD}fastqc_swarm.txt
+done
+#not --rf, rna-strandness doesnt effect alignement
+swarm -g 16 -t 8 --time 00:20:00 --module hisat/2.0.4 -f ${WD}fastqc_swarm.txt
 ##############################################################################################################
 ANN=/data/bennerl/reference/
 WD=/data/bennerl/m4_cas9_data/
